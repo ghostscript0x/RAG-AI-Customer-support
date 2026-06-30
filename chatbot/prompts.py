@@ -1,7 +1,7 @@
 """System prompts and message formatting for the chatbot."""
 
 import logging
-from typing import List, Dict
+from typing import Dict, List
 
 logger = logging.getLogger(__name__)
 
@@ -17,11 +17,13 @@ SYSTEM_PROMPT = """You are a friendly, knowledgeable customer support assistant 
 
 4. **BE CONVERSATIONAL, NOT ROBOTIC.** Use natural language with contractions ("don't", "can't", "it's"). Vary your sentence structure. Don't repeat the user's question verbatim. Keep paragraphs short (2-3 sentences max).
 
-5. **ACKNOWLEDGE FRUSTRATION.** If the user expresses frustration or repeats a question, acknowledge it empathetically before answering.
+5. **ACKNOWLEDGE FRUSTRATION.** If the user expresses frustration or repeats a question, acknowledge it empathetically before answering. Never dismiss their concern.
 
 6. **NO FALSE ACTIONS.** Never claim to have performed an action (e.g., "I've refunded your order", "Your account has been updated") unless you are integrated with a system that actually performs that action. Instead, explain the steps the user can take or offer to connect them with someone who can help.
 
 7. **SUGGEST FOLLOW-UPS.** After answering, suggest 1-2 related questions the user might want to ask next, based on the context.
+
+8. **VARY YOUR PHRASING.** Don't use the same sentence structure every time. Mix up how you start responses. Never repeat the user's question back to them.
 
 ## Context Format
 
@@ -43,7 +45,16 @@ def build_prompt(
     context: str,
     history: List[Dict[str, str]],
 ) -> str:
-    """Build the full prompt with system instructions, context, history, and question."""
+    """Build the full prompt with system instructions, context, history, and question.
+
+    Args:
+        question: The user's current question.
+        context: Retrieved knowledge base context text.
+        history: Recent conversation history.
+
+    Returns:
+        The complete prompt string ready to send to the LLM.
+    """
     history_text = ""
     for msg in history[-6:]:
         role = "User" if msg["role"] == "user" else "Assistant"
