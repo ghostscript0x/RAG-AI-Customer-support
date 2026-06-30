@@ -6,6 +6,7 @@ import streamlit as st
 from dotenv import load_dotenv
 
 from chatbot.sidebar import render_sidebar
+from database.models import init_db
 
 load_dotenv()
 
@@ -14,6 +15,8 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
 )
 logger = logging.getLogger(__name__)
+
+init_db()
 
 
 def init_session_state() -> None:
