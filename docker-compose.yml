@@ -1,0 +1,15 @@
+services:
+  rag-ai-chatbot:
+    build: .
+    container_name: rag-ai-chatbot
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./chroma_db:/app/chroma_db
+      - ./rag_ai.db:/app/rag_ai.db
+    env_file:
+      - .env
+    environment:
+      - STREAMLIT_SERVER_HEADLESS=true
+      - STREAMLIT_SERVER_PORT=8501
+    restart: unless-stopped
