@@ -13,10 +13,13 @@ class TestPrompts:
     """Test suite for chatbot.prompts."""
 
     def test_system_prompt_has_required_sections(self) -> None:
-        """System prompt must contain grounding, citation, and hallucination rules."""
+        """System prompt must contain grounding, citation, hallucination rules, and anti-robotic rules."""
         assert "GROUND YOUR ANSWERS IN THE PROVIDED CONTEXT" in SYSTEM_PROMPT
         assert "NEVER HALLUCINATE" in SYSTEM_PROMPT
         assert "ALWAYS CITE SOURCES" in SYSTEM_PROMPT
+        assert "BE DIRECT AND CONVERSATIONAL" in SYSTEM_PROMPT
+        assert "Never start with a generic greeting" in SYSTEM_PROMPT
+        assert "NO PADDING" in SYSTEM_PROMPT
         assert "{context}" in SYSTEM_PROMPT
         assert "{history}" in SYSTEM_PROMPT
         assert "{question}" in SYSTEM_PROMPT

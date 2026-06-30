@@ -48,7 +48,7 @@ def main() -> None:
                             tmp.write(uploaded_file.getvalue())
                             tmp_path = tmp.name
 
-                        success, chunk_count, message = ingest_file(tmp_path)
+                        success, chunk_count, message = ingest_file(tmp_path, original_filename=uploaded_file.name)
 
                         if success:
                             add_document(

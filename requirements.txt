@@ -3,6 +3,7 @@ groq
 sentence-transformers
 chromadb
 torch
+torchvision
 pypdf
 python-docx
 beautifulsoup4

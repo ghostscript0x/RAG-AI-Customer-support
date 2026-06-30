@@ -69,8 +69,9 @@ class TestPrompts:
     def test_system_prompt_has_conversational_quality_rules(self) -> None:
         assert "ACKNOWLEDGE FRUSTRATION" in SYSTEM_PROMPT
         assert "NO FALSE ACTIONS" in SYSTEM_PROMPT
-        assert "SUGGEST FOLLOW-UPS" in SYSTEM_PROMPT
-        assert "VARY YOUR PHRASING" in SYSTEM_PROMPT
+        assert "BE DIRECT AND CONVERSATIONAL" in SYSTEM_PROMPT
+        assert "Never start with a generic greeting" in SYSTEM_PROMPT
+        assert "NO PADDING" in SYSTEM_PROMPT
 
     def test_build_prompt_includes_all_sections(self) -> None:
         result = build_prompt(
