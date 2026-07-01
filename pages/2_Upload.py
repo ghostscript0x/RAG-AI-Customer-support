@@ -41,12 +41,17 @@ def main() -> None:
                     st.warning(f"Skipping unsupported file: {uploaded_file.name}")
                     continue
 
+                file_bytes = uploaded_file.getvalue()
+                if not file_bytes:
+                    st.warning(f"Skipping empty file: {uploaded_file.name}")
+                    continue
+
                 with st.status(f"Processing {uploaded_file.name}...") as status:
                     try:
                         with tempfile.NamedTemporaryFile(
                             delete=False, suffix=ext
                         ) as tmp:
-                            tmp.write(uploaded_file.getvalue())
+                            tmp.write(file_bytes)
                             tmp_path = tmp.name
 
                         success, chunk_count, message = ingest_file(tmp_path, original_filename=uploaded_file.name)

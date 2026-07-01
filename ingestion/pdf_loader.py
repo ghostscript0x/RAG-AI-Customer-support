@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Optional
 
 from pypdf import PdfReader
+from pypdf.errors import EmptyFileError
 
 logger = logging.getLogger(__name__)
 
@@ -36,6 +37,9 @@ def load_pdf(file_path: str) -> Optional[str]:
             return None
 
         return "\n\n".join(pages)
+    except EmptyFileError:
+        logger.error("PDF file is empty: %s", file_path)
+        return None
     except Exception as exc:
         logger.exception("Failed to extract text from PDF %s", file_path)
         return None
