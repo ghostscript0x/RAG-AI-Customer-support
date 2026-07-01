@@ -11,7 +11,7 @@ from chatbot.groq_client import get_groq_client, stream_response
 from chatbot.memory import resolve_pronouns
 from chatbot.prompts import build_prompt
 from chatbot.response_builder import assemble_response, parse_sources_from_response
-from chatbot.sidebar import render_sidebar
+from chatbot.sidebar import init_session_state, render_sidebar
 from database.repository import add_conversation
 from rag.retriever import retrieve, compute_confidence
 
@@ -20,6 +20,7 @@ logger = logging.getLogger(__name__)
 
 def main() -> None:
     """Render the chat interface with RAG-grounded responses."""
+    init_session_state()
     st.session_state.current_page = "1_New_Chat"
     render_sidebar()
 
@@ -94,9 +95,7 @@ def main() -> None:
                         "confidence": confidence,
                     })
 
-                    session_id = st.session_state.get(
-                        "conversation_id", str(uuid.uuid4())[:8]
-                    )
+                    session_id = st.session_state.get("conversation_id") or str(uuid.uuid4())[:8]
                     st.session_state.conversation_id = session_id
 
                     add_conversation(

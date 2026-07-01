@@ -4,7 +4,10 @@ import logging
 import os
 from typing import Optional
 
+from dotenv import load_dotenv
 from groq import Groq
+
+load_dotenv()
 
 logger = logging.getLogger(__name__)
 

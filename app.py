@@ -5,7 +5,7 @@ import logging
 import streamlit as st
 from dotenv import load_dotenv
 
-from chatbot.sidebar import render_sidebar
+from chatbot.sidebar import init_session_state, render_sidebar
 from database.models import init_db
 
 load_dotenv()
@@ -17,16 +17,6 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 init_db()
-
-
-def init_session_state() -> None:
-    """Initialize Streamlit session state variables."""
-    if "messages" not in st.session_state:
-        st.session_state.messages = []
-    if "conversation_id" not in st.session_state:
-        st.session_state.conversation_id = None
-    if "current_page" not in st.session_state:
-        st.session_state.current_page = ""
 
 
 def main() -> None:

@@ -7,7 +7,7 @@ from pathlib import Path
 
 import streamlit as st
 
-from chatbot.sidebar import render_sidebar
+from chatbot.sidebar import init_session_state, render_sidebar
 from database.repository import add_document
 from rag.pipeline import ingest_file, ingest_website
 
@@ -18,6 +18,7 @@ ALLOWED_EXTENSIONS = {".pdf", ".docx", ".csv"}
 
 def main() -> None:
     """Upload documents to the knowledge base."""
+    init_session_state()
     st.session_state.current_page = "2_Upload"
     render_sidebar()
 

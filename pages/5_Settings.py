@@ -4,11 +4,12 @@ import os
 
 import streamlit as st
 
-from chatbot.sidebar import render_sidebar
+from chatbot.sidebar import init_session_state, render_sidebar
 
 
 def main() -> None:
     """Display environment configuration."""
+    init_session_state()
     st.session_state.current_page = "5_Settings"
     render_sidebar()
 

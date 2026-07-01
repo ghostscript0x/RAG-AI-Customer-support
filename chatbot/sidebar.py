@@ -1,6 +1,14 @@
-"""Shared sidebar navigation for all pages."""
+"""Shared sidebar navigation and session state initialization for all pages."""
 
 import streamlit as st
+
+
+def init_session_state() -> None:
+    """Initialize Streamlit session state variables."""
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
+    if "current_page" not in st.session_state:
+        st.session_state.current_page = ""
 
 
 def render_sidebar() -> None:

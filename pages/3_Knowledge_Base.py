@@ -4,7 +4,7 @@ import logging
 
 import streamlit as st
 
-from chatbot.sidebar import render_sidebar
+from chatbot.sidebar import init_session_state, render_sidebar
 from database.repository import list_documents, delete_document as delete_doc_record
 from rag.vector_store import delete_documents as delete_vs_docs, list_documents as list_vs_docs, add_documents
 from rag.chunker import chunk_text
@@ -19,6 +19,7 @@ logger = logging.getLogger(__name__)
 
 def main() -> None:
     """Manage knowledge base documents."""
+    init_session_state()
     st.session_state.current_page = "3_Knowledge_Base"
     render_sidebar()
 

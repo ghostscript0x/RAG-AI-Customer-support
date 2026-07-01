@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 import streamlit as st
 from collections import Counter
 
-from chatbot.sidebar import render_sidebar
+from chatbot.sidebar import init_session_state, render_sidebar
 from database.repository import get_conversation_stats, get_recent_conversations
 
 logger = logging.getLogger(__name__)
@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 
 def main() -> None:
     """View chat analytics and metrics."""
+    init_session_state()
     st.session_state.current_page = "4_Analytics"
     render_sidebar()
 
